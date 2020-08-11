@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+											http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>EA101G2</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/TestDB3</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	
+<!-- 	<listener> -->
+<!--   	<listener-class>listener.SessionListener</listener-class> -->
+<!-- 	</listener> -->
+	
+  <filter>
+    <filter-name>setCharacterEncoding</filter-name>
+    <filter-class>filters.SetCharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>setCharacterEncoding</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+	
+	<filter>
+    <filter-name>BackLoginFilter</filter-name>
+    <filter-class>filters.BackLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>BackLoginFilter</filter-name>
+    <url-pattern>/back-end/*</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>INCLUDE</dispatcher>
+    <dispatcher>ERROR</dispatcher>
+    <dispatcher>ASYNC</dispatcher>
+  </filter-mapping>
+  
+ 	<filter>
+		<filter-name>FrontLoginfilter</filter-name>
+		<filter-class>filters.FrontLoginfilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FrontLoginfilter</filter-name>
+		<url-pattern>/front-end/mem/update_mem_input.jsp</url-pattern>
+		<url-pattern>/front-end/mem/member_center.jsp</url-pattern>
+		<url-pattern>/front-end/mem/identify.jsp</url-pattern>
+		<url-pattern>/front-end/suggest/addSuggest.jsp</url-pattern>
+		<url-pattern>/front-end/chat/member_chat.jsp</url-pattern>
+		<url-pattern>/front-end/bok/*</url-pattern>
+		<url-pattern>/front-end/messageboard/listAllMessageBoard.jsp</url-pattern>
+		<url-pattern>/front-end/onlineShop/payMoney.jsp</url-pattern>
+		<url-pattern>/front-end/activity/activityshop2.jsp</url-pattern>
+		<url-pattern>/front-end/activity/activitythx.jsp</url-pattern>
+		<url-pattern>/front-end/activity/activitycart.jsp</url-pattern>
+		
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  	<!-- 博維 -->
+	
+	<servlet>
+	  <servlet-name>MemServlet</servlet-name>
+	  <servlet-class>com.mem.controller.MemServlet</servlet-class>
+	 </servlet>
+ 	<servlet-mapping>
+	  <servlet-name>MemServlet</servlet-name>
+	  <url-pattern>/front-end/mem/mem.do</url-pattern>
+	  <url-pattern>/back-end/mem/mem.do</url-pattern>
+ 	</servlet-mapping>
+ 	
+	<servlet>
+	  <servlet-name>MemberLogoutServlet</servlet-name>
+	  <servlet-class>com.mem.controller.MemberLogoutServlet</servlet-class>
+	 </servlet>
+ 	<servlet-mapping>
+	  <servlet-name>MemberLogoutServlet</servlet-name>
+	  <url-pattern>/front-end/mem/memberlogout.do</url-pattern>
+ 	</servlet-mapping>
+ 
+  	<servlet>
+	  <servlet-name>SugServlet</servlet-name>
+	  <servlet-class>com.suggest.controller.SugServlet</servlet-class>
+ 	</servlet>
+	 <servlet-mapping>
+	  <servlet-name>SugServlet</servlet-name>
+	  <url-pattern>/front-end/suggest/suggest.do</url-pattern>
+	  <url-pattern>/back-end/suggest/suggest.do</url-pattern>
+	 </servlet-mapping>
+ 
+ 	<servlet>
+	  <servlet-name>mPic_showServlet</servlet-name>
+	  <servlet-class>com.mem.controller.mPic_showServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+	  <servlet-name>mPic_showServlet</servlet-name>
+	  <url-pattern>/front-end/mem/mem.mPic</url-pattern>
+	  <url-pattern>/back-end/mem/mem.mPic</url-pattern> 
+ 	</servlet-mapping>
+	
+	<!-- 漢峰 -->	
+
+	<servlet>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<servlet-class>com.employee.controller.EmployeeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<url-pattern>/back-end/employee/employee.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>EmployeeLoginServlet</servlet-name>
+		<servlet-class>com.employee.controller.EmployeeLoginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeLoginServlet</servlet-name>
+		<url-pattern>/employeelogin.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EmployeeLogoutServlet</servlet-name>
+		<servlet-class>com.employee.controller.EmployeeLogoutServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeLogoutServlet</servlet-name>
+		<url-pattern>/employeelogout.do</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>EPicShowServlet</servlet-name>
+		<servlet-class>com.employee.controller.EPicShowServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EPicShowServlet</servlet-name>
+		<url-pattern>/back-end/employee/epicshow.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<servlet-class>com.tool.controller.CheckCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CheckCodeServlet</servlet-name>
+		<url-pattern>/checkcode.do</url-pattern>
+	</servlet-mapping>
+	
+	<!--鈺崧-->	
+	
+	<servlet>
+		<servlet-name>ShoppingServlet</servlet-name>
+		<servlet-class>com.product.controller.ShoppingServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShoppingServlet</servlet-name>
+		<url-pattern>/product/ShoppingServlet.do</url-pattern>
+	</servlet-mapping>
+	<servlet>
+	
+		<servlet-name>DBGifReaderProduct</servlet-name>
+		<servlet-class>com.product.controller.DBGifReaderProduct</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DBGifReaderProduct</servlet-name>
+		<url-pattern>/product/DBGifReaderProduct.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>SungProductServlet</servlet-name>
+		<servlet-class>com.product.controller.SungProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SungProductServlet</servlet-name>
+		<url-pattern>/product/SungProductServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>LiveOrderServlet</servlet-name>
+		<servlet-class>com.liveOrder.controller.LiveOrderServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LiveOrderServlet</servlet-name>
+		<url-pattern>/liveOrder/LiveOrderServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>TablenoServlet</servlet-name>
+		<servlet-class>com.product.controller.TablenoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TablenoServlet</servlet-name>
+		<url-pattern>/product/TablenoServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ONOServlet</servlet-name>
+		<servlet-class>com.ono.controller.ONOServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ONOServlet</servlet-name>
+		<url-pattern>/ONOServlet/ONOServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>OnlineShopServlet</servlet-name>
+		<servlet-class>com.product.controller.OnlineShopServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>OnlineShopServlet</servlet-name>
+		<url-pattern>/product/OnlineShopServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdministratorServlet</servlet-name>
+		<servlet-class>com.administrator.controller.AdministratorServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdministratorServlet</servlet-name>
+		<url-pattern>/administrator/AdministratorServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 守偉 -->
+	
+	<servlet>
+		<servlet-name>CouponServlet</servlet-name>
+		<servlet-class>com.coupon.controller.CouponServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CouponServlet</servlet-name>
+		<url-pattern>/coupon/coupon.do</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 明儀 -->
+	
+	<servlet>
+		<servlet-name>ProductServlet</servlet-name>
+		<servlet-class>com.product.controller.ProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductServlet</servlet-name>
+		<url-pattern>/product.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ProductReader</servlet-name>
+		<servlet-class>com.product.controller.ProductReader</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductReader</servlet-name>
+		<url-pattern>/ProductReader</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 留言板相關 -->
+	 <servlet>
+    <servlet-name>MessageBoardServlet</servlet-name>
+    <servlet-class>com.messageboard.controller.MessageBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageBoardServlet</servlet-name>
+    <url-pattern>/front-end/messageboard/messageboard.do</url-pattern>
+  </servlet-mapping>
+  
+  <!-- 檢舉相關 -->
+  <servlet>
+    <servlet-name>MessageReportServlet</servlet-name>
+    <servlet-class>com.messagereport.controller.MessageReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessageReportServlet</servlet-name>
+    <url-pattern>/front-end/messagereport/messagereport.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>MessageReportServlet</servlet-name>
+    <url-pattern>/back-end/messagereport/messagereport.do</url-pattern>
+  </servlet-mapping>
+	
+	<!-- 銘傑 -->
+	<servlet>
+	    <servlet-name>ActivityServlet</servlet-name>
+	    <servlet-class>com.activity.controller.ActivityServlet</servlet-class>
+    </servlet>
+ 	 <servlet-mapping>
+	    <servlet-name>ActivityServlet</servlet-name>
+	    <url-pattern>/back-end/activity/activityServlet.do</url-pattern>
+  	</servlet-mapping>
+  	
+  	<servlet>
+	    <servlet-name>ActivitypostServlet</servlet-name>
+	    <servlet-class>com.activitypost.controller.ActivitypostServlet</servlet-class>
+  	</servlet>
+ 	 <servlet-mapping>
+	    <servlet-name>ActivitypostServlet</servlet-name>
+	    <url-pattern>/back-end/activity_post/activitypostServlet.do</url-pattern>
+  	</servlet-mapping>
+  	
+  	 <servlet>
+	    <servlet-name>ActparticipationServlet</servlet-name>
+	    <servlet-class>com.actparticipation.controller.ActparticipationServlet</servlet-class>
+ 	 </servlet>
+ 	 <servlet-mapping>
+	    <servlet-name>ActparticipationServlet</servlet-name>
+	    <url-pattern>/back-end/activity_participation/actparticipationServlet.do</url-pattern>
+  	</servlet-mapping>
+  	
+ 	 <servlet>
+	  	<servlet-name>ActivityShop</servlet-name>
+	  	<servlet-class>com.activity.controller.ActivityShop</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	  	<servlet-name>ActivityShop</servlet-name>
+	  	<url-pattern>/front-end/activity/activityshop.do</url-pattern>
+  	</servlet-mapping>
+  	
+	 <servlet>
+	  	<servlet-name>ActivityFeelings</servlet-name>
+	  	<servlet-class>com.activitypost.controller.ActivityFeelings</servlet-class>
+ 	 </servlet>
+  	<servlet-mapping>
+ 		<servlet-name>ActivityFeelings</servlet-name>
+  		<url-pattern>/front-end/activity/activityfeelings.do</url-pattern>
+ 	 </servlet-mapping>
+  
+   	<servlet>
+	    <servlet-name>ActivitypicServlet</servlet-name>
+	    <servlet-class>com.activity.controller.ActivitypicServlet</servlet-class>
+ 	 </servlet>
+ 	 <servlet-mapping>
+	    <servlet-name>ActivitypicServlet</servlet-name>
+	    <url-pattern>/back-end/activity/activitypicServlet.do</url-pattern>
+	    <url-pattern>/front-end/activity/activitypicServlet.do</url-pattern>
+  	</servlet-mapping>
+  	
+ 	 <servlet>
+	    <servlet-name>ActivitypostpicServlet</servlet-name>
+	    <servlet-class>com.activitypost.controller.ActivitypostpicServlet</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+	    <servlet-name>ActivitypostpicServlet</servlet-name>
+	    <url-pattern>/back-end/activity_post/activitypostpicServlet.do</url-pattern>
+	    <url-pattern>/front-end/activity_post/activitypostpicServlet.do</url-pattern>
+  	</servlet-mapping>
+	
+</web-app>
